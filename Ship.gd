@@ -12,6 +12,8 @@ var angular_speed = PI
 var velocity = Vector2.ZERO
 var thruster_on = false
 
+var rng = RandomNumberGenerator.new()
+
 onready var viewport_size = get_viewport_rect().size
 onready var main = $"/root/Main"
 
@@ -66,6 +68,11 @@ func _process(delta):
 		#bullet.velocity = Vector2.UP.rotated(rotation)
 		bullet.velocity = velocity + Vector2.UP.rotated(rotation) * 400
 		main.add_child(bullet)
+		
+	if Input.is_action_just_pressed("shift"):
+		position.x = rng.randf_range(0, viewport_size.x)
+		position.y = rng.randf_range(0, viewport_size.y)
+		velocity = Vector2.ZERO
 	
 func wrap_viewport():
 	position.x = wrapf(position.x, 0, viewport_size.x)
