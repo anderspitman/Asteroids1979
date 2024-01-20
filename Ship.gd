@@ -2,11 +2,13 @@ extends Node2D
 
 const Bullet = preload("res://Bullet.tscn")
 
+const MAX_SPEED = 400
+const ACCELERATION = 4
+const DECELERATION = ACCELERATION / 2
+
 var ship_points = PoolVector2Array()
 var angular_speed = PI
-var speed = 500
-var acceleration = 2
-var deceleration = 1
+
 var velocity = Vector2.ZERO
 var thruster_on = false
 
@@ -27,11 +29,16 @@ func _ready():
 func _draw():
 	#draw_circle(position, 10, Color.white)
 	draw_polyline(ship_points, Color(1, 1, 1, 1), 1)
+	draw_line(Vector2.ZERO, velocity.rotated(-rotation), Color.green, 4)
+
 	
 func _physics_process(delta):
 	pass
 	
 func _process(delta):
+	#print("Ship.direction", Vector2.UP.rotated(rotation))
+
+	update()
 	
 	var direction = 0
 	if Input.is_action_pressed("ui_left"):
@@ -40,10 +47,13 @@ func _process(delta):
 		direction = 1
 	
 	if Input.is_action_pressed("ui_up"):
-		velocity += Vector2.UP.rotated(rotation) * acceleration
+		velocity += Vector2.UP.rotated(rotation) * ACCELERATION
 	else:
 		var decel_vec = velocity.normalized() * -1
-		velocity += decel_vec * deceleration
+		velocity += decel_vec * DECELERATION
+		
+	if velocity.length() > MAX_SPEED:
+		velocity = velocity.normalized() * MAX_SPEED
 		
 	rotation += angular_speed * direction * delta	
 	position += velocity * delta
@@ -52,10 +62,9 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("ui_select"):
 		var bullet = Bullet.instance()
-		bullet.position = position
-		bullet.direction = Vector2.UP.rotated(rotation).normalized()
-		print("instance Bullet")
-		print(position)
+		bullet.position = position + Vector2.UP.rotated(rotation) * 10
+		#bullet.velocity = Vector2.UP.rotated(rotation)
+		bullet.velocity = velocity + Vector2.UP.rotated(rotation) * 400
 		main.add_child(bullet)
 	
 func wrap_viewport():
