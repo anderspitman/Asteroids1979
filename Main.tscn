@@ -16,4 +16,5 @@ position = Vector2( 200, 200 )
 wait_time = 3.0
 autostart = true
 
+[connection signal="destroyed" from="Asteroid" to="." method="_on_Asteroid_destroyed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Asteroid_spawn_timeout"]

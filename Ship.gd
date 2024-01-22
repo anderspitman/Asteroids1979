@@ -32,7 +32,7 @@ func _ready():
 func _draw():
 	#draw_circle(position, 10, Color.white)
 	draw_polyline(ship_points, Color(1, 1, 1, 1), 1)
-	draw_line(Vector2.ZERO, velocity.rotated(-rotation), Color.green, 4)
+	#draw_line(Vector2.ZERO, velocity.rotated(-rotation), Color.green, 4)
 
 	
 func _physics_process(delta):
