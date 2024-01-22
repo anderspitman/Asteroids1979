@@ -1,9 +1,10 @@
-extends Node2D
+extends Area2D
 
+const Asteroid := preload("res://Asteroid.tscn")
 const Bullet = preload("res://Bullet.tscn")
 
 const MAX_SPEED = 400
-const ACCELERATION = 4
+const ACCELERATION = 8
 const DECELERATION = ACCELERATION / 2
 
 var ship_points = PoolVector2Array()
@@ -77,3 +78,9 @@ func _process(delta):
 func wrap_viewport():
 	position.x = wrapf(position.x, 0, viewport_size.x)
 	position.y = wrapf(position.y, 0, viewport_size.y)
+
+func _on_Ship_area_entered(area):	
+	if area.is_in_group("Asteroids"):
+		position.x = viewport_size.x / 2
+		position.y = viewport_size.y / 2
+		velocity = Vector2.ZERO

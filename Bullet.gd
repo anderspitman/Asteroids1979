@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 onready var viewport_size = get_viewport_rect().size
 
