@@ -4,7 +4,6 @@ export var size = "large"
 signal destroyed(position, size)
 
 onready var viewport_size = get_viewport_rect().size
-onready var main = $"/root/Main"
 
 var velocity = Vector2.ZERO
 var radius = 0

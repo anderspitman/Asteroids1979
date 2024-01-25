@@ -4,6 +4,8 @@ const Asteroid := preload("res://Asteroid.tscn")
 
 onready var viewport_size = get_viewport().size
 
+onready var viewport = $"/root/Main/Container/ViewportContainer/Viewport"
+
 func _on_Asteroid_spawn_timeout():
 	var pos = Vector2(rand_range(0, viewport_size.x), rand_range(0, viewport_size.y))
 	create_asteroid(pos, "large")
@@ -21,4 +23,4 @@ func create_asteroid(position, size):
 	asteroid.position = position
 	asteroid.size = size
 	asteroid.connect("destroyed", self, "_on_Asteroid_destroyed")
-	add_child(asteroid)
+	viewport.add_child(asteroid)

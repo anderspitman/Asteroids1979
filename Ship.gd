@@ -16,18 +16,22 @@ var thruster_on = false
 var rng = RandomNumberGenerator.new()
 
 onready var viewport_size = get_viewport_rect().size
-onready var main = $"/root/Main"
+onready var viewport = $"/root/Main/Container/ViewportContainer/Viewport"	
 
 func _init():
 	print("Ship instanced")
-
+	
 func _ready():
+	
+	print(viewport_size)
 	
 	var size = 10
 	ship_points.push_back(Vector2(0, -1) * size)
 	ship_points.push_back(Vector2(-1, 1) * size)
 	ship_points.push_back(Vector2(1, 1) * size)
 	ship_points.push_back(Vector2(0, -1) * size)
+	
+	position = Vector2(viewport_size.x, viewport_size.y) / 2
 	
 func _draw():
 	#draw_circle(position, 10, Color.white)
@@ -67,8 +71,8 @@ func _process(delta):
 		var bullet = Bullet.instance()
 		bullet.position = position + Vector2.UP.rotated(rotation) * 10
 		#bullet.velocity = Vector2.UP.rotated(rotation)
-		bullet.velocity = velocity + Vector2.UP.rotated(rotation) * 400
-		main.add_child(bullet)
+		bullet.velocity = velocity + Vector2.UP.rotated(rotation) * 900
+		viewport.add_child(bullet) 
 		
 	if Input.is_action_just_pressed("shift"):
 		position.x = rng.randf_range(0, viewport_size.x)
