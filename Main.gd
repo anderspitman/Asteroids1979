@@ -4,7 +4,7 @@ const Asteroid := preload("res://Asteroid.tscn")
 
 onready var viewport_size = get_viewport().size
 
-onready var viewport = $"/root/Main/Container/ViewportContainer/Viewport"
+onready var viewport = $"/root/Main/ViewportContainer/Viewport"
 
 func _on_Asteroid_spawn_timeout():
 	var pos = Vector2(rand_range(0, viewport_size.x), rand_range(0, viewport_size.y))

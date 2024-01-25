@@ -16,7 +16,7 @@ var thruster_on = false
 var rng = RandomNumberGenerator.new()
 
 onready var viewport_size = get_viewport_rect().size
-onready var viewport = $"/root/Main/Container/ViewportContainer/Viewport"	
+onready var viewport = $"/root/Main/ViewportContainer/Viewport"	
 
 func _init():
 	print("Ship instanced")
