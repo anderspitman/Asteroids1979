@@ -36,7 +36,7 @@ position = Vector2( 200, 200 )
 [node name="Asteroid" parent="ViewportContainer/Viewport" instance=ExtResource( 3 )]
 
 [node name="Timer" type="Timer" parent="ViewportContainer/Viewport"]
-wait_time = 3.0
+wait_time = 5.0
 autostart = true
 
 [connection signal="destroyed" from="ViewportContainer/Viewport/Asteroid" to="." method="_on_Asteroid_destroyed"]
