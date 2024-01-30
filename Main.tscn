@@ -53,5 +53,6 @@ margin_bottom = 14.0
 text = "Hi there"
 
 [connection signal="score_updated" from="." to="ViewportContainer/HUD" method="_on_Main_score_updated"]
+[connection signal="destroyed" from="ViewportContainer/Viewport/Ship" to="." method="_on_Ship_destroyed"]
 [connection signal="destroyed" from="ViewportContainer/Viewport/Asteroid" to="." method="_on_Asteroid_destroyed"]
 [connection signal="timeout" from="ViewportContainer/Viewport/Timer" to="." method="_on_Asteroid_spawn_timeout"]

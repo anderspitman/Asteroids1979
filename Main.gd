@@ -9,6 +9,7 @@ onready var viewport_size = get_viewport().size
 onready var viewport = $"/root/Main/ViewportContainer/Viewport"
 
 var score = 0
+var ship_count = 4
 
 func _on_Asteroid_spawn_timeout():
 	var pos = Vector2(rand_range(0, viewport_size.x), rand_range(0, viewport_size.y))
@@ -34,3 +35,7 @@ func create_asteroid(position, size):
 	asteroid.size = size
 	asteroid.connect("destroyed", self, "_on_Asteroid_destroyed")
 	viewport.add_child(asteroid)
+
+
+func _on_Ship_destroyed():
+	ship_count -= 1
