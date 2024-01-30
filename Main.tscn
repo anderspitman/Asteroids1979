@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Asteroid.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Background.gd" type="Script" id=4]
+[ext_resource path="res://HUD.gd" type="Script" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -39,5 +40,18 @@ position = Vector2( 200, 200 )
 wait_time = 5.0
 autostart = true
 
+[node name="HUD" type="CanvasLayer" parent="ViewportContainer"]
+script = ExtResource( 5 )
+
+[node name="ScoreLabel" type="Label" parent="ViewportContainer/HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -26.0
+margin_top = 32.0
+margin_right = 26.0
+margin_bottom = 14.0
+text = "Hi there"
+
+[connection signal="score_updated" from="." to="ViewportContainer/HUD" method="_on_Main_score_updated"]
 [connection signal="destroyed" from="ViewportContainer/Viewport/Asteroid" to="." method="_on_Asteroid_destroyed"]
 [connection signal="timeout" from="ViewportContainer/Viewport/Timer" to="." method="_on_Asteroid_spawn_timeout"]
