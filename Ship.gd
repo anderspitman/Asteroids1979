@@ -1,6 +1,6 @@
 extends Area2D
 
-signal destroyed
+signal destroyed(ship)
 
 const Asteroid := preload("res://Asteroid.tscn")
 const Bullet = preload("res://Bullet.tscn")
@@ -90,4 +90,4 @@ func _on_Ship_area_entered(area):
 		position.x = viewport_size.x / 2
 		position.y = viewport_size.y / 2
 		velocity = Vector2.ZERO
-		emit_signal("destroyed")
+		emit_signal("destroyed", self)

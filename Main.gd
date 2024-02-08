@@ -37,5 +37,7 @@ func create_asteroid(position, size):
 	viewport.add_child(asteroid)
 
 
-func _on_Ship_destroyed():
+func _on_Ship_destroyed(ship):
 	ship_count -= 1
+	if ship_count == 0:
+		ship.queue_free()
